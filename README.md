@@ -1,5 +1,21 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Tech Stack
+
+This project uses the following technologies:
+
+- **Next.js**: React framework for building web applications with server-side rendering, static site generation, and API routes.
+- **React**: Library for building user interfaces with components.
+- **TypeScript**: Typed superset of JavaScript for better code quality and developer experience.
+- **Tailwind CSS**: Utility-first CSS framework for styling components.
+- **Framer Motion**: Animation library for creating smooth transitions and interactions in React components.
+- **@stripe/stripe-js**: Stripe's JavaScript SDK for integrating payment processing and checkout functionality.
+- **@radix-ui/react-dialog**: Accessible and customizable dialog/modal component from Radix UI.
+- **@radix-ui/react-tooltip**: Accessible tooltip component for displaying additional information on hover.
+- **React Hook Form**: Library for managing forms in React with validation and performance optimizations.
+- **Zod**: TypeScript-first schema validation library for form validation and data parsing.
+- **@headlessui/react**: Unstyled, fully accessible UI components for building custom interfaces.
+
 ## Getting Started
 
 First, run the development server:
