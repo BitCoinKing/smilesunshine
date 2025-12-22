@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Mission } from "@/components/Sections/Mission";
 import { ProgramsSection } from "@/components/ProgramsSection";
-import { AboutFounder } from "@/components/Sections/AboutFounder";
+import { AboutSection } from "@/components/AboutSection";
 import { Vision } from "@/components/Sections/Vision";
 import { Board } from "@/components/Sections/Board";
 import { Donate } from "@/components/Sections/Donate";
@@ -26,7 +26,7 @@ export default function Home() {
 
         <div className="border-t border-gray-200"></div>
 
-        <AboutFounder />
+        <AboutSection />
 
         <div className="border-t border-gray-200"></div>
 
