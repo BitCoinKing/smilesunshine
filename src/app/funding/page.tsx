@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const phases = [
   {
@@ -71,26 +73,28 @@ function ProgressBar({ goal, current, isActive }: { goal: number; current: numbe
 }
 
 function FloatingParticles() {
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 20 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 4,
+      duration: 6 + Math.random() * 4,
+    }));
+    setParticles(generated);
+  }, []);
+
+  // During SSR particles array is empty, preventing hydration mismatch
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 20 }, (_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-[#F6EB61]/30 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -100],
-            opacity: [0, 0.6, 0],
-          }}
-          transition={{
-            duration: 8 + Math.random() * 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 5,
-          }}
+          style={{ left: `${p.left}%`, top: `${p.top}%` }}
+          animate={{ y: [0, -20, 0] }}
+          transition={{ repeat: Infinity, duration: p.duration, delay: p.delay }}
         />
       ))}
     </div>
@@ -174,7 +178,7 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
           disabled
           className="mt-8 rounded-full w-full py-3 bg-gray-500/30 border border-gray-400/20 text-gray-300 cursor-not-allowed opacity-60"
         >
-          Locked Until Phase 1 Is Fully Funded
+          Locked Until Phase {phase.id === 2 ? "1" : "2"} Is Fully Funded
         </button>
       )}
     </motion.div>
@@ -183,63 +187,69 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
 
 export default function FundingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#050816] via-[#0b1020] to-[#020617] relative">
-      <FloatingParticles />
+    <>
+      <Header />
+      <div className="pt-16">
+        <div className="min-h-screen bg-gradient-to-br from-[#050816] via-[#0b1020] to-[#020617] relative">
+          <FloatingParticles />
 
-      {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="relative z-10 px-6 md:px-16 pt-20 pb-12"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+          {/* Header */}
+          <motion.header
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            transition={{ duration: 0.7 }}
+            className="relative z-10 px-6 md:px-16 pt-20 pb-12"
           >
-            Funding Our Mission
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-xl text-ss-muted max-w-2xl mx-auto"
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
+                className="text-4xl md:text-6xl font-bold text-white mb-6"
+              >
+                Funding Our Mission
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className="text-xl text-ss-muted max-w-2xl mx-auto"
+              >
+                Building Hope One Phase at a Time
+              </motion.p>
+            </div>
+          </motion.header>
+
+          {/* Introduction */}
+          <motion.section
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="px-6 md:px-16 pb-16"
           >
-            Building Hope One Phase at a Time
-          </motion.p>
-        </div>
-      </motion.header>
+            <div className="max-w-4xl mx-auto text-center">
+              <p className="text-lg text-ss-muted leading-relaxed mb-8">
+                Smile Sunshine is a Nonprofit on a mission to create safe, judgment-free healing spaces for vulnerable youth.
+                We are at the beginning of our journey — no building yet, no physical space yet — just a powerful mission and a community ready to bring it to life.
+              </p>
+              <p className="text-ss-text font-medium">
+                Your support determines how quickly each phase activates.
+              </p>
+            </div>
+          </motion.section>
 
-      {/* Introduction */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="px-6 md:px-16 pb-16"
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-ss-muted leading-relaxed mb-8">
-            Smile Sunshine is a Nonprofit on a mission to create safe, judgment-free healing spaces for vulnerable youth.
-            We are at the beginning of our journey — no building yet, no physical space yet — just a powerful mission and a community ready to bring it to life.
-          </p>
-          <p className="text-ss-text font-medium">
-            Your support determines how quickly each phase activates.
-          </p>
+          {/* Phases */}
+          <section className="px-6 md:px-16 pb-20">
+            <div className="max-w-6xl mx-auto space-y-16">
+              {phases.map((phase, index) => (
+                <PhaseCard key={phase.id} phase={phase} index={index} />
+              ))}
+            </div>
+          </section>
         </div>
-      </motion.section>
-
-      {/* Phases */}
-      <section className="px-6 md:px-16 pb-20">
-        <div className="max-w-6xl mx-auto space-y-12">
-          {phases.map((phase, index) => (
-            <PhaseCard key={phase.id} phase={phase} index={index} />
-          ))}
-        </div>
-      </section>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
