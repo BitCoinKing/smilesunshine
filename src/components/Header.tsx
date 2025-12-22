@@ -24,7 +24,7 @@ export function Header() {
                   <circle cx="12" cy="12" r="10" fill="currentColor" />
                   <path d="M12 2v4m0 8v4m8-8h-4m-8 0H4m15.364-2.636l-2.828 2.828m-8.484 0l-2.828-2.828M21 12h-4m-8 0H4m13.656 5.656l-2.828-2.828m-8.484 0l-2.828 2.828" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="text-xl font-bold text-ss-text">Smile Sunshine Org</span>
+                <span className="text-xl font-bold text-ss-text">Smile Sunshine</span>
               </div>
             </div>
             <nav className="hidden md:flex items-center gap-8 text-sm text-ss-text/80">
