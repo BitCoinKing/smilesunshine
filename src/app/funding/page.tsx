@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const stages = [
+const phases = [
   {
     id: 1,
     title: "Digital Foundation",
@@ -23,7 +23,7 @@ const stages = [
     title: "First LA Safe Space",
     goal: 1000000,
     current: 0,
-    description: "This stage brings Sera's vision to life — a physical, judgment-free space where kids can talk, create, and heal through expression.",
+    description: "This phase brings Sera's vision to life — a physical, judgment-free space where kids can talk, create, and heal through expression.",
     features: [
       "After-school programs",
       "Mentorship circles",
@@ -48,7 +48,7 @@ const stages = [
   }
 ];
 
-function ProgressBar({ goal, current }: { goal: number; current: number }) {
+function ProgressBar({ goal, current, isActive }: { goal: number; current: number; isActive: boolean }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -59,11 +59,11 @@ function ProgressBar({ goal, current }: { goal: number; current: number }) {
   }, [current, goal]);
 
   return (
-    <div className="w-full bg-white/20 rounded-full h-4 overflow-hidden">
+    <div className={`w-full rounded-full h-4 overflow-hidden ${isActive ? "bg-white/20" : "bg-gray-700/40"}`}>
       <motion.div
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+        transition={isActive ? { duration: 1.5, ease: "easeOut" } : {}}
         className="h-full bg-gradient-to-r from-[#F6EB61] via-[#FBDB65] to-[#E87A85] rounded-full"
       />
     </div>
@@ -97,34 +97,47 @@ function FloatingParticles() {
   );
 }
 
-function StageCard({ stage, index }: { stage: typeof stages[0]; index: number }) {
+function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number }) {
+  const isActive = phase.id === 1;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.7, delay: index * 0.2 }}
-      className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl"
+      className={`bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl ${
+        !isActive ? "opacity-70 hover:opacity-80 transition" : ""
+      }`}
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <div className="text-2xl font-bold text-white mb-2">Stage {stage.id}</div>
-          <h3 className="text-xl font-semibold text-white mb-2">{stage.title}</h3>
+          <div className={`text-2xl font-bold mb-2 ${isActive ? "text-white" : "text-gray-300"}`}>
+            Phase {phase.id}
+          </div>
+          <h3 className={`text-xl font-semibold mb-2 ${isActive ? "text-white" : "text-gray-300"}`}>
+            {phase.title}
+          </h3>
+          {!isActive && (
+            <p className="text-sm text-gray-400 italic">
+              This phase activates after Phase 1 is fully funded.
+            </p>
+          )}
         </div>
         <div className="text-right">
-          <div className="text-lg font-bold text-white">
-            ${stage.current.toLocaleString()}
+          <div className={`text-lg font-bold ${isActive ? "text-white" : "text-gray-300"}`}>
+            ${phase.current.toLocaleString()}
           </div>
           <div className="text-sm text-ss-muted">
-            of ${stage.goal.toLocaleString()}
+            of ${phase.goal.toLocaleString()}
           </div>
         </div>
       </div>
 
-      <ProgressBar goal={stage.goal} current={stage.current} />
+      <ProgressBar goal={phase.goal} current={phase.current} isActive={isActive} />
 
-      <p className="text-ss-muted mt-6 mb-6 leading-relaxed">
-        {stage.description}
+      <p className={`mt-6 mb-6 leading-relaxed ${isActive ? "text-ss-muted" : "text-gray-300"}`}>
+        {phase.description}
       </p>
 
       <div>
@@ -132,14 +145,14 @@ function StageCard({ stage, index }: { stage: typeof stages[0]; index: number })
           What activates:
         </h4>
         <ul className="space-y-2">
-          {stage.features.map((feature, i) => (
+          {phase.features.map((feature: string, i: number) => (
             <motion.li
               key={i}
               initial={{ opacity: 0, x: -10 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: (index * 0.2) + (i * 0.1) }}
-              className="text-ss-text flex items-center"
+              className={`flex items-center ${isActive ? "text-ss-text" : "text-gray-300"}`}
             >
               <span className="w-2 h-2 bg-[#FBDB65] rounded-full mr-3 flex-shrink-0"></span>
               {feature}
@@ -148,13 +161,22 @@ function StageCard({ stage, index }: { stage: typeof stages[0]; index: number })
         </ul>
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="mt-8 w-full bg-gradient-to-r from-[#F6EB61] via-[#FBDB65] to-[#F7A26A] text-slate-900 font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all"
-      >
-        Support This Stage
-      </motion.button>
+      {isActive ? (
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="mt-8 w-full bg-gradient-to-r from-[#F6EB61] via-[#FBDB65] to-[#F7A26A] text-slate-900 font-semibold py-3 px-6 rounded-full shadow-lg hover:shadow-xl transition-all"
+        >
+          Support This Phase
+        </motion.button>
+      ) : (
+        <button
+          disabled
+          className="mt-8 rounded-full w-full py-3 bg-gray-500/30 border border-gray-400/20 text-gray-300 cursor-not-allowed opacity-60"
+        >
+          Locked Until Phase 1 Is Fully Funded
+        </button>
+      )}
     </motion.div>
   );
 }
@@ -186,7 +208,7 @@ export default function FundingPage() {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="text-xl text-ss-muted max-w-2xl mx-auto"
           >
-            Building Hope One Stage at a Time
+            Building Hope One Phase at a Time
           </motion.p>
         </div>
       </motion.header>
@@ -201,48 +223,23 @@ export default function FundingPage() {
       >
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-lg text-ss-muted leading-relaxed mb-8">
-            Smile Sunshine Org is a brand-new nonprofit on a mission to create safe, judgment-free healing spaces for vulnerable youth.
+            Smile Sunshine is a Nonprofit on a mission to create safe, judgment-free healing spaces for vulnerable youth.
             We are at the beginning of our journey — no building yet, no physical space yet — just a powerful mission and a community ready to bring it to life.
           </p>
           <p className="text-ss-text font-medium">
-            Your support determines how quickly each stage activates.
+            Your support determines how quickly each phase activates.
           </p>
         </div>
       </motion.section>
 
-      {/* Stages */}
+      {/* Phases */}
       <section className="px-6 md:px-16 pb-20">
         <div className="max-w-6xl mx-auto space-y-12">
-          {stages.map((stage, index) => (
-            <StageCard key={stage.id} stage={stage} index={index} />
+          {phases.map((phase, index) => (
+            <PhaseCard key={phase.id} phase={phase} index={index} />
           ))}
         </div>
       </section>
-
-      {/* Call to Action */}
-      <motion.section
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="px-6 md:px-16 pb-20"
-      >
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Ready to Make a Difference?
-          </h2>
-          <p className="text-ss-muted mb-8">
-            Every contribution brings us closer to creating lasting change in Los Angeles.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-[#F6EB61] via-[#FBDB65] to-[#F7A26A] text-slate-900 font-semibold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all text-lg"
-          >
-            Start Donating Today
-          </motion.button>
-        </div>
-      </motion.section>
     </div>
   );
 }

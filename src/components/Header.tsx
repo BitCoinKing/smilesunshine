@@ -39,7 +39,7 @@ export function Header() {
               ))}
             </nav>
             <div className="hidden md:block">
-              <button className="rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-yellow-400 transition">
+              <button className="rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
                 Donate
               </button>
             </div>
@@ -68,7 +68,7 @@ export function Header() {
                 </Disclosure.Button>
               ))}
               <div className="px-3 py-2">
-                <button className="w-full rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-yellow-400 transition">
+                <button className="w-full rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
                   Donate
                 </button>
               </div>
