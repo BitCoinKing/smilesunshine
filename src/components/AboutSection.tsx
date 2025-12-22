@@ -69,7 +69,7 @@ export function AboutSection() {
         >
           <p>
             Too many young people grow up carrying heavy stories in silence — unstable homes,
-            illness in the family, domestic struggles, grief, or emotional hardship. Smile Sunshine Org
+            illness in the family, domestic struggles, grief, or emotional hardship. Smile Sunshine
             was created to ensure no child navigates those feelings alone.
           </p>
 

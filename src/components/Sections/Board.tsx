@@ -30,7 +30,7 @@ export function Board() {
             Board of Believers
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ss-muted">
-            These are the humans guiding Smile Sunshine Org with integrity,
+            These are the humans guiding Smile Sunshine with integrity,
             transparency, and a deep commitment to vulnerable youth.
           </p>
         </motion.div>

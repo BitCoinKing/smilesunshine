@@ -89,7 +89,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm">© 2025 Smile Sunshine Org. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">© 2025 Smile Sunshine. All rights reserved.</p>
         </div>
       </div>
     </footer>

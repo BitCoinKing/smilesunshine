@@ -19,7 +19,7 @@ export function Mission() {
             Our Mission
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ss-muted">
-            At Smile Sunshine Org, we believe every child deserves a safe space to heal, grow, and express themselves freely.
+            At Smile Sunshine, we believe every child deserves a safe space to heal, grow, and express themselves freely.
             Through compassionate mentorship and creative outlets, we help vulnerable youth build confidence, resilience, and hope for the future.
           </p>
         </motion.div>

@@ -40,7 +40,7 @@ export function MissionDialog({ children }: MissionDialogProps) {
                     Our Mission: Healing through Expression.
                   </Dialog.Title>
                   <Dialog.Description className="mt-2 text-sm text-ss-muted">
-                    Smile Sunshine Org exists to create safe, judgment‑free
+                    Smile Sunshine exists to create safe, judgment‑free
                     spaces where vulnerable youth can finally breathe, be
                     themselves, and feel deeply seen.
                   </Dialog.Description>
@@ -61,7 +61,7 @@ export function MissionDialog({ children }: MissionDialogProps) {
                 <p>
                   Too many kids grow up carrying heavy stories in silence—sick
                   parents, unstable homes, grief, and trauma—without a safe
-                  place to put those feelings. Smile Sunshine Org is building
+                  place to put those feelings. Smile Sunshine is building
                   spaces where they can talk, create, and connect without fear
                   of being judged or dismissed.
                 </p>
