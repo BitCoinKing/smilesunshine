@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const phases = [
   {
@@ -23,27 +23,42 @@ const phases = [
 
 // Floating particles component
 function VisionParticles() {
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 12 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      xMovement: Math.random() * 40 - 20,
+      duration: 16 + Math.random() * 8,
+      delay: Math.random() * 6,
+      color: ['#F6EB61', '#FBDB65', '#F7A26A'][Math.floor(Math.random() * 3)],
+    }));
+    setParticles(generated);
+  }, []);
+
+  // During SSR particles array is empty, preventing hydration mismatch
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 12 }, (_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            background: i % 3 === 0 ? '#F6EB61' : i % 3 === 1 ? '#FBDB65' : '#F7A26A',
+            left: `${p.left}%`,
+            top: `${p.top}%`,
+            background: p.color,
           }}
           animate={{
             y: [0, -120, 0],
-            x: [0, Math.random() * 40 - 20, 0],
+            x: [0, p.xMovement, 0],
             opacity: [0.1, 0.4, 0.1],
           }}
           transition={{
-            duration: 16 + Math.random() * 8,
+            duration: p.duration,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: Math.random() * 6,
+            delay: p.delay,
           }}
         />
       ))}

@@ -1,10 +1,8 @@
 "use client";
 
 const MOCK_BOARD = [
-  { name: "Sera [Last Name]", role: "Founder & Executive Director", quote: "Every child deserves a safe place to speak their truth." },
+  { name: "Sera Najarian", role: "Founder & Executive Director", quote: "Every child deserves a safe place to speak their truth." },
   { name: "Gor Gevorkyan", role: "Co-Founder & Technology Lead", quote: "We're using technology to build spaces where kids feel seen." },
-  { name: "Future Board Member", role: "Treasurer", quote: "Your donations are handled with radical transparency." },
-  { name: "Future Board Member", role: "Community Advocate", quote: "We listen to families first." },
 ];
 
 import { motion } from "framer-motion";
@@ -38,23 +36,29 @@ export function Board() {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="grid gap-6 sm:grid-cols-2"
+          className="grid gap-8 sm:grid-cols-2 max-w-4xl mx-auto"
         >
           {MOCK_BOARD.map((member, index) => (
             <motion.div
               key={member.name}
               variants={itemVariants}
               custom={index}
-              className="bg-white text-slate-900 rounded-3xl shadow-sm p-6 flex flex-col gap-2"
+              whileHover={{
+                y: -8,
+                scale: 1.02,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)"
+              }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="bg-gradient-to-br from-white via-white to-gray-50 text-slate-900 rounded-3xl shadow-lg shadow-black/5 p-8 flex flex-col gap-4 border border-white/20 backdrop-blur-sm"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-ss-primary to-ss-accent" />
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#F6EB61] via-[#FBDB65] to-[#F7A26A] shadow-md" />
                 <div>
-                  <p className="font-semibold text-sm">{member.name}</p>
-                  <p className="text-xs text-gray-500">{member.role}</p>
+                  <p className="font-bold text-base text-gray-900">{member.name}</p>
+                  <p className="text-sm text-gray-600 font-medium">{member.role}</p>
                 </div>
               </div>
-              <p className="text-xs sm:text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-700 leading-relaxed italic">
                 "{member.quote}"
               </p>
             </motion.div>

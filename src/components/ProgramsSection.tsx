@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Home, Palette, Users, Sun, HeartHandshake } from "lucide-react";
 import { ProgramCard } from "./ProgramCard";
@@ -75,26 +75,40 @@ const programs = [
 
 // Floating particles component
 function FloatingParticles() {
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 15 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      xMovement: Math.random() * 10 - 5,
+      duration: 8 + Math.random() * 4,
+      delay: Math.random() * 2,
+    }));
+    setParticles(generated);
+  }, []);
+
+  // During SSR particles array is empty, preventing hydration mismatch
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 15 }, (_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 bg-white/10 rounded-full"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: `${p.left}%`,
+            top: `${p.top}%`,
           }}
           animate={{
             y: [0, -20, 0],
-            x: [0, Math.random() * 10 - 5, 0],
+            x: [0, p.xMovement, 0],
             opacity: [0.1, 0.3, 0.1],
           }}
           transition={{
-            duration: 8 + Math.random() * 4,
+            duration: p.duration,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: Math.random() * 2,
+            delay: p.delay,
           }}
         />
       ))}

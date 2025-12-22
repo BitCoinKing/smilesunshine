@@ -1,8 +1,22 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export function AboutSection() {
+  const [particles, setParticles] = useState<any[]>([]);
+
+  useEffect(() => {
+    const generated = Array.from({ length: 8 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      xMovement: Math.random() * 20 - 10,
+      duration: 12 + Math.random() * 6,
+      delay: Math.random() * 4,
+    }));
+    setParticles(generated);
+  }, []);
+
   return (
     <section className="relative bg-[#020617] py-24 px-6 md:px-20">
       {/* Soft gradient halo */}
@@ -10,24 +24,24 @@ export function AboutSection() {
 
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 8 }, (_, i) => (
+        {particles.map((p, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-[#F6EB61]/20 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${p.left}%`,
+              top: `${p.top}%`,
             }}
             animate={{
               y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
+              x: [0, p.xMovement, 0],
               opacity: [0.2, 0.5, 0.2],
             }}
             transition={{
-              duration: 12 + Math.random() * 6,
+              duration: p.duration,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 4,
+              delay: p.delay,
             }}
           />
         ))}
