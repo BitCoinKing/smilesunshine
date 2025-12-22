@@ -47,7 +47,7 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="text-sm tracking-widest text-[#F6EB61] font-medium"
         >
-          ABOUT SMILE SUNSHINE ORG
+          ABOUT SMILE SUNSHINE
         </motion.span>
 
         <motion.h2

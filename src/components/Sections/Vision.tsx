@@ -62,9 +62,9 @@ function TimelineLine() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div ref={ref} className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#F6EB61]/40 via-[#FBDB65]/40 to-[#E87A85]/40">
+    <div ref={ref} className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-[#F6EB61]/60 via-[#FBDB65]/60 to-[#E87A85]/60 blur-[0.5px]">
       <motion.div
-        className="w-full bg-gradient-to-b from-[#F6EB61] via-[#FBDB65] to-[#E87A85] rounded-full"
+        className="w-full bg-gradient-to-b from-[#F6EB61] via-[#FBDB65] to-[#E87A85] rounded-full blur-[0.3px]"
         style={{ height: lineHeight }}
       />
     </div>
@@ -72,33 +72,23 @@ function TimelineLine() {
 }
 
 function TimelineCard({ phase, title, description, index }: { phase: string; title: string; description: string; index: number }) {
+  const isLeft = index % 2 === 0;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.3 }}
-      className="relative flex items-center w-full max-w-2xl mx-auto"
+      className="relative flex items-center w-full max-w-4xl mx-auto"
     >
-      {/* Timeline node */}
-      <motion.div
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
-        viewport={{ once: true }}
-        className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-[#F6EB61] to-[#FBDB65] shadow-lg z-10 flex items-center justify-center"
-      >
-        <div className="w-3 h-3 bg-white rounded-full"></div>
-      </motion.div>
-
-      {/* Card */}
+      {/* Clean card with more breathing room */}
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className={`w-full ml-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl p-8 ${
-          index % 2 === 0 ? 'mr-auto' : 'ml-auto'
-        }`}
+        className={`relative w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl p-8
+          ${isLeft ? 'mr-28 text-right' : 'ml-28'}`}
       >
-        <div className="flex items-center gap-4 mb-4">
+        <div className={`flex items-center gap-4 mb-4 ${isLeft ? 'justify-end' : 'justify-start'}`}>
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-[#F6EB61] text-black">
             Phase {phase}
           </span>
