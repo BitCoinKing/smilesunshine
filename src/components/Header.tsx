@@ -1,15 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Mission", href: "#mission" },
-  { name: "Programs", href: "#programs" },
-  { name: "Board", href: "#board" },
-  { name: "Donate", href: "#donate" },
+  { name: "Mission", href: "/#mission" },
+  { name: "Programs", href: "/#programs" },
+  { name: "Board", href: "/#board" },
+  { name: "Donate", href: "/#donate" },
   { name: "Funding", href: "/funding" },
-  { name: "I Need Help", href: "#need-help" },
+  { name: "I Need Help", href: "/#need-help" },
 ];
 
 export function Header() {
@@ -29,19 +30,21 @@ export function Header() {
             </div>
             <nav className="hidden md:flex items-center gap-8 text-sm text-ss-text/80">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className="hover:text-ss-primary transition-colors focus-visible:ring-2 focus-visible:ring-ss-primary/70 focus-visible:outline-none rounded px-1"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
             <div className="hidden md:block">
-              <button className="rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
-                Donate
-              </button>
+              <Link href="/#donate">
+                <button className="rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
+                  Donate
+                </button>
+              </Link>
             </div>
             <div className="-mr-2 flex md:hidden">
               <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-ss-text hover:bg-white/10 hover:text-ss-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ss-primary">
@@ -58,19 +61,20 @@ export function Header() {
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3 sm:px-3 bg-[#050816cc] backdrop-blur-md border-t border-white/5">
               {navigation.map((item) => (
-                <Disclosure.Button
+                <Link
                   key={item.name}
-                  as="a"
                   href={item.href}
                   className="text-ss-text hover:text-ss-primary block px-3 py-2 rounded-md text-base font-medium"
                 >
                   {item.name}
-                </Disclosure.Button>
+                </Link>
               ))}
               <div className="px-3 py-2">
-                <button className="w-full rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
-                  Donate
-                </button>
+                <Link href="/#donate" className="block">
+                  <button className="w-full rounded-full bg-ss-primary text-black px-5 py-2 text-sm font-semibold hover:bg-[#F7D73A] transition">
+                    Donate
+                  </button>
+                </Link>
               </div>
             </div>
           </Disclosure.Panel>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export function Footer() {
@@ -36,11 +37,11 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <nav className="flex flex-col space-y-2">
-              <a href="#mission" className="text-gray-400 hover:text-white transition-colors">Mission</a>
-              <a href="#programs" className="text-gray-400 hover:text-white transition-colors">Programs</a>
-              <a href="#board" className="text-gray-400 hover:text-white transition-colors">Board</a>
-              <a href="#donate" className="text-gray-400 hover:text-white transition-colors">Donate</a>
-              <a href="#need-help" className="text-gray-400 hover:text-white transition-colors">I Need Help</a>
+              <Link href="/#mission" className="text-gray-400 hover:text-white transition-colors">Mission</Link>
+              <Link href="/#programs" className="text-gray-400 hover:text-white transition-colors">Programs</Link>
+              <Link href="/#board" className="text-gray-400 hover:text-white transition-colors">Board</Link>
+              <Link href="/#donate" className="text-gray-400 hover:text-white transition-colors">Donate</Link>
+              <Link href="/#need-help" className="text-gray-400 hover:text-white transition-colors">I Need Help</Link>
             </nav>
           </div>
 

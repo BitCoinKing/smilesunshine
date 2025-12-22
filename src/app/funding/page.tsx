@@ -124,7 +124,7 @@ function PhaseCard({ phase, index }: { phase: typeof phases[0]; index: number })
           </h3>
           {!isActive && (
             <p className="text-sm text-gray-400 italic">
-              This phase activates after Phase 1 is fully funded.
+              This phase activates after Phase {phase.id - 1} is fully funded.
             </p>
           )}
         </div>
