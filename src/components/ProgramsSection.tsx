@@ -121,7 +121,7 @@ export default function ProgramsSection() {
   const [active, setActive] = useState<ProgramItem | null>(null);
 
   return (
-    <section className="relative py-24 overflow-hidden" style={{
+    <section id="programs" className="relative py-24 overflow-hidden" style={{
       background: 'linear-gradient(180deg, #F6EB61 0%, #F4D98E 40%, #F3C2A0 100%)'
     }}>
       <FloatingParticles />

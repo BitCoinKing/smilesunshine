@@ -30,7 +30,7 @@ export function Mission() {
   const [active, setActive] = useState<MissionItem | null>(null);
 
   return (
-    <div className="py-20 text-center relative">
+    <div id="mission" className="py-20 text-center relative">
       <h2 className="text-4xl font-bold text-white mb-6">Our Mission</h2>
       <p className="text-lg max-w-3xl mx-auto text-gray-300 mb-12">
         At Smile Sunshine, every child deserves a safe space to heal, grow, and express.
