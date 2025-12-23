@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Mission } from "@/components/Sections/Mission";
-import { ProgramsSection } from "@/components/ProgramsSection";
+import ProgramsSection from "@/components/ProgramsSection";
 import { AboutSection } from "@/components/AboutSection";
 import { Vision } from "@/components/Sections/Vision";
 import { Board } from "@/components/Sections/Board";
